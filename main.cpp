@@ -4,6 +4,7 @@
 #include <stdexcept>
 
 #include "types.h"
+#include "sha512.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -33,7 +34,6 @@ int main(int argc, char *argv[])
         }
         
         auto ii = std::istreambuf_iterator<char>(f.rdbuf());
-        auto eof = std::istreambuf_iterator<char>();
         
         std::string input;
         

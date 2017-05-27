@@ -54,6 +54,8 @@ int main(int argc, char *argv[])
         
         f << std::endl << "OUTPUT=" << sha512(message) << std::endl;
         
+        f.close();
+        
     } catch (std::logic_error e) {
         std::cerr << "ERROR!!! ";
         std::cerr << e.what() << std::endl;

@@ -2,4 +2,4 @@ cd cmake-build-debug
 cmake ..
 make
 cd ..
-./cmake-build-debug/SHA512 --path=test1.txt
+./cmake-build-debug/compute_sha512_hash --path=test1.txt

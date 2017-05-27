@@ -52,6 +52,10 @@ int main(int argc, char *argv[])
         
         std::getline(f, message);
         
+        f.close();
+        
+        f.open(std::string(iterators.first, path.end()), std::ios_base::app);
+        
         f << std::endl << "OUTPUT=" << sha512(message) << std::endl;
         
         f.close();

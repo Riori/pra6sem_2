@@ -1,0 +1,7 @@
+*.a
+*.o
+*~
+.DS_store
+/Prac_Asya_SHA-512/
+*.xcodeproj
+

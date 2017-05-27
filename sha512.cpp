@@ -13,22 +13,34 @@ u64 rotl(u64 x, int n) {
     return x << n | x >> (8*sizeof(x) - n);
 }
 
-u64 s0(u64 x) {
+u64 s0(u64 x)
+{
+	return rotr(x, 1) ^ rotr(x, 8) ^ (x >> 7);
 }
 
-u64 s1(u64 x) {
+u64 s1(u64 x)
+{
+	return rotr(x, 19) ^ rotr(x, 61) ^ (x >> 6);
 }
 
-u64 Ch(u64 x, u64 y, u64 z) {
+u64 Ch(u64 x, u64 y, u64 z)
+{
+	return (x & y) ^ (~x & z);
 }
 
-u64 Maj(u64 x, u64 y, u64 z) {
+u64 Maj(u64 x, u64 y, u64 z)
+{
+	return (x & y) ^ (x & z) ^ (y & z);
 }
 
-u64 Sigma0(u64 x) {
+u64 Sigma0(u64 x)
+{
+	return rotr(x, 28) ^ rotr(x, 34) ^ rotr(x, 39);
 }
 
-u64 Sigma1(u64 x) {
+u64 Sigma1(u64 x)
+{
+	return rotr(x, 14) ^ rotr(x, 18) ^ rotr(x, 41);
 }
 
 u8 symbol_to_hex(char c)

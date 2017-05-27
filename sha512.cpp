@@ -71,7 +71,7 @@ std::string sha512(std::string message) {
         digits.push_back(symbol_to_hex(cur_symbol));
     }
     
-    digits.push_back(0x10);
+    digits.push_back(0x8);
     
     while (digits.size() % 16 != 0) {
         digits.push_back(0x00);

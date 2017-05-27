@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <stdexcept>
+#include <algorithm>
 
 #include "types.h"
 #include "sha512.hpp"

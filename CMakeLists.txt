@@ -1,14 +1,21 @@
 cmake_minimum_required(VERSION 3.5)
-project(SHA512)
+project(compute_sha512_hash)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES
-        const.h
-        main.cpp
-        sha.h
+set(SOURCE_LIB_FILES
         sha512.cpp
-        sha512.hpp
-        types.h)
+)
+set(HEADERS
+	const.h
+	sha512.hpp
+	types.h
+)
+set(SOURCE
+	main.cpp
+)
 
-add_executable(SHA512 ${SOURCE_FILES})
+add_library(sha512 STATIC ${SOURCE_LIB_FILES} ${HEADERS})
+add_executable(compute_sha512_hash ${SOURCE} ${HEADERS})
+
+target_link_libraries(compute_sha512_hash sha512)

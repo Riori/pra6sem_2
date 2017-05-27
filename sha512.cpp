@@ -6,9 +6,11 @@
 #include "types.h"
 
 u64 rotr(u64 x, int n) {
+    return x >> n | x << (8*sizeof(x) - n);
 }
 
 u64 rotl(u64 x, int n) {
+    return x << n | x >> (8*sizeof(x) - n);
 }
 
 u64 s0(u64 x) {

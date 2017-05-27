@@ -77,13 +77,14 @@ std::string sha512(std::string message) {
         digits.push_back(0x00);
     }
     
-    std::vector<u64> longs(digits.size()/16);
+    std::vector<u64> longs;
 
     for (int i=0; i<digits.size(); i+=16) {
         u64 res = 0;
         for (int j=0; j<16; ++j) {
             res |= u64(digits[i+j]) << (64 - 4*(j+1));
         }
+        longs.push_back(res);
     }
     
     while (longs.size() % 16 != 14) {

@@ -6,11 +6,13 @@
 #include "types.h"
 #include "const.h"
 
-u64 rotr(u64 x, int n) {
+u64 rotr(u64 x, int n)
+{
     return x >> n | x << (8*sizeof(x) - n);
 }
 
-u64 rotl(u64 x, int n) {
+u64 rotl(u64 x, int n)
+{
     return x << n | x >> (8*sizeof(x) - n);
 }
 
@@ -61,33 +63,39 @@ u8 symbol_to_hex(char c)
     throw std::logic_error("Invalid hex character");
 }
 
-std::string sha512(std::string message) {
+std::string sha512(std::string message)
+{
     std::stringstream ss(message);
     
     std::vector<u8> digits;
     char cur_symbol;
     
-    while (ss >> cur_symbol) {
+    while (ss >> cur_symbol)
+    {
         digits.push_back(symbol_to_hex(cur_symbol));
     }
     
     digits.push_back(0x8);
     
-    while (digits.size() % 16 != 0) {
+    while (digits.size() % 16 != 0)
+    {
         digits.push_back(0x00);
     }
     
     std::vector<u64> longs;
 
-    for (int i=0; i<digits.size(); i+=16) {
+    for (int i=0; i<digits.size(); i+=16)
+    {
         u64 res = 0;
-        for (int j=0; j<16; ++j) {
+        for (int j=0; j<16; ++j)
+        {
             res |= u64(digits[i+j]) << (64 - 4*(j+1));
         }
         longs.push_back(res);
     }
     
-    while (longs.size() % 16 != 14) {
+    while (longs.size() % 16 != 14)
+    {
         longs.push_back(0x0);
     }
     
@@ -96,10 +104,12 @@ std::string sha512(std::string message) {
     
     std::vector<u64> hash(H0, std::end(H0));
     
-    for (int i=0; i<longs.size(); i+=16) {
+    for (int i=0; i<longs.size(); i+=16)
+    {
         
         std::vector<u64> words(longs.begin()+i, longs.begin()+i+16);
-        for (int i=16; i<=79; i++) {
+        for (int i=16; i<=79; i++)
+        {
             words.push_back( s1(*(words.end()-2)) + *(words.end()-7) + s0(*(words.end()-15)) + *(words.end()-16) );
         }
         
@@ -112,7 +122,8 @@ std::string sha512(std::string message) {
         u64 g = hash[6];
         u64 h = hash[7];
         
-        for (int i=0; i<=79; ++i) {
+        for (int i=0; i<=79; ++i)
+        {
             u64 T1 = h + Sigma1(e) + Ch(e, f, g) + K[i] + words[i];
             u64 T2 = Sigma0(a) + Maj(a, b, c);
             
@@ -141,7 +152,8 @@ std::string sha512(std::string message) {
     res.fill('0');
     res.width(2);
     
-    for (u64 i: hash) {
+    for (u64 i: hash)
+    {
         res << std::hex << i;
     }
     
